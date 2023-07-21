@@ -8,7 +8,7 @@ import openpyxl
 
 
 def getRE_Magnets_Canada():
-    df=pd.read_csv('../imports/canada/850511_2000-2020MAGNETS.csv', delimiter=';')
+    df=pd.read_csv('../data/imports/canada/850511_2000-2020MAGNETS.csv', delimiter=';')
 
     df = df.transpose()
 

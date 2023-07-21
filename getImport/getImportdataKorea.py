@@ -7,7 +7,7 @@ import openpyxl
 
 
 def getRE_Korea():
-    df=pd.read_csv('../imports/SouthKorea/280530_2000-2020.csv', delimiter=';', decimal='.')
+    df=pd.read_csv('../data/imports/SouthKorea/280530_2000-2020.csv', delimiter=';', decimal='.')
 
     df = df.drop(['Items', 'H.S Code', 'Export Weight', 'Export Value', 'Trade Balance'], axis=1)
     df.columns = ['Year', 'Import_Weight', 'Import_Value']
@@ -35,7 +35,7 @@ def getRE_Korea():
 
 
 def getMagnets_Korea():
-    df=pd.read_csv('../imports/SouthKorea/850511_2000-2020.csv', delimiter=';', decimal='.')
+    df=pd.read_csv('../data/imports/SouthKorea/850511_2000-2020.csv', delimiter=';', decimal='.')
 
     df = df.drop(['Items', 'H.S Code', 'Export Weight', 'Export Value', 'Trade Balance'], axis=1)
     df.columns = ['Year', 'Import_Weight', 'Import_Value']
