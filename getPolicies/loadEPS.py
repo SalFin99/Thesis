@@ -4,7 +4,7 @@ import openpyxl
 
 
 def load_and_cleanEPScontrol():
-    df=pd.read_csv("../data/eps/epsControl/controlEPS.csv", decimal=".")
+    df=pd.read_csv("data/eps/epsControl/controlEPS.csv", decimal=".")
 
     df=df.rename(columns={'Value':'EPSvalue'})
 
@@ -15,7 +15,7 @@ def load_and_cleanEPScontrol():
     df['logEPS']=np.log(df['EPSvalue'])
 
 
-    df.to_csv("EPSandLogEPS_Control.csv", index=False)
+    df.to_csv("OG_EPSandLogEPS_Control.csv", index=False)
 
 
     #create a pivot table with MultiIndex with COU and Country
@@ -24,7 +24,7 @@ def load_and_cleanEPScontrol():
     return df
 
 def load_and_cleanEPStreatment():
-    df=pd.read_csv("../data/eps/epsEU.csv", decimal=".", delimiter=";")
+    df=pd.read_csv("data/eps/epsEU.csv", decimal=".", delimiter=";")
 
     df=df.rename(columns={'Value':'EPSvalue'})
 
@@ -44,26 +44,6 @@ def load_and_cleanEPStreatment():
     return df
 
 
-def loadImports():
-    df=pd.read_excel("data/imports/eudata.xlsx", decimal=".")
 
-    df.Year=pd.to_datetime(df['Year'], format='%Y').dt.year
-
-    df=df.pivot_table(values="REPORTER", index="Year", columns=["REPORTER"])
-
-    print(df)
-
-    return df
-
-def loadQty():
-    df=pd.read_excel("data/imports/test1990to2021.xlsx", decimal=".")
-
-    df.Year=pd.to_datetime(df['Year'], format='%Y').dt.year
-
-    df=df.pivot_table(values="Qty", index="Year", columns=["Country"])
-
-    print(df)
-
-    return df
 
 
