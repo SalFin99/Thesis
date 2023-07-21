@@ -1,12 +1,13 @@
 import matplotlib.pyplot as plt
-from getPolicies import getPolicyAdoption
 
+import getPolicies.loadPolicyAdoptionCAPMF
+from getPolicies import loadPolicyAdoptionCAPMF
 
 def adoptionVisualization():
 
-    df = getPolicyAdoption.getAdoption()
+    df = loadPolicyAdoptionCAPMF.getAdoption()
 
-    plt.figure(figsize=(12, 6))
+    plt.figure(figsize=(14, 8))
     plt.plot(df.index, df['EUadopted'])
     plt.title("Number of EU adopted policies 2000-2019")
     plt.xticks(df.index, rotation=45)  # Rotate x-axis tick labels for better readability
@@ -17,6 +18,7 @@ def adoptionVisualization():
 
 
     plt.grid(True, linestyle='--', alpha=0.5)
+    plt.tight_layout()  # To avoid label cutoff
     plt.show()
 
 
