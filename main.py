@@ -1,10 +1,8 @@
-import loadData
+from visualizations import visualizations
+from getPolicies import loadCAPMF
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib
-import visualizations
 
-visualizations.adoptionVisualization()
+df = loadCAPMF.cleanCAPFMpolicies()
 
+print(df.head(20))
 

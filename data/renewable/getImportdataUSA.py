@@ -8,7 +8,7 @@ import openpyxl
 
 
 def getRE_Magnets_USA():
-    df=pd.read_csv('data/imports/USA/rareEarths&magnets.csv', delimiter=';')
+    df=pd.read_csv('../imports/USA/rareEarths&magnets.csv', delimiter=';')
     df=df.drop('Data Type', axis=1)
 
     df = df.transpose()

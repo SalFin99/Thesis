@@ -4,7 +4,7 @@ import openpyxl
 
 
 def load_and_cleanEPScontrol():
-    df=pd.read_csv("data/eps/epsControl/controlEPS.csv", decimal=".")
+    df=pd.read_csv("../data/eps/epsControl/controlEPS.csv", decimal=".")
 
     df=df.rename(columns={'Value':'EPSvalue'})
 
@@ -24,7 +24,7 @@ def load_and_cleanEPScontrol():
     return df
 
 def load_and_cleanEPStreatment():
-    df=pd.read_csv("data/eps/epsEU.csv", decimal=".", delimiter=";")
+    df=pd.read_csv("../data/eps/epsEU.csv", decimal=".", delimiter=";")
 
     df=df.rename(columns={'Value':'EPSvalue'})
 
