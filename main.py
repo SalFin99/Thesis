@@ -1,8 +1,11 @@
-from visualizations import visualizations
-from getPolicies import loadCAPMF
+from visualizations import visualizations, CAPMFvisuals
+from getPolicies import loadCAPMF, loadEPS
+from panels import CAPMFpanels
+
 import pandas as pd
 
-df = loadCAPMF.cleanCAPFMpolicies()
+CAPMFvisuals.preCommonTrendsStringency()
+CAPMFvisuals.preCommonTrendsLogStringency()
 
-print(df.head(20))
+
 
