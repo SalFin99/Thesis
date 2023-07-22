@@ -64,6 +64,19 @@ def getNonEU():
 
     return df
 
+def getControl():
+    nonEU = []
+
+    df = cleanCAPFMpolicies()
+
+    df = df[~df.Country.isin(nonEU)]
+
+    df.to_csv("data/CAPMF/NonEU_cleanedCAPMF.csv", index=False)
+
+    return df
+
+
+
 
 
 
