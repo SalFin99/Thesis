@@ -54,26 +54,26 @@ def getEU26():
     return df
 
 def getNonEU():
-    EU26 = ['AUT', 'BEL', 'BGR', 'CZE', 'DEU', 'DNK', 'ESP', 'EST', 'FIN', 'FRA', 'GRC', 'HUN', 'HRV', 'IRL', 'ITA', 'LTU', 'LUX', 'LVA', 'MLT', 'NLD', 'POL', 'PRT', 'ROU', 'SVN','SVK', 'SWE']
 
-    df = cleanCAPFMpolicies()
+    nonEU = ['JPN', 'USA', 'BRA', 'KOR', 'CAN']
 
-    df = df[~df.Country.isin(EU26)]
+    if nonEU:
+        df = cleanCAPFMpolicies()
 
-    df.to_csv("data/CAPMF/NonEU_cleanedCAPMF.csv", index=False)
+        df = df[~df.Country.isin(nonEU)]
+
+    else:
+        EU26 = ['AUT', 'BEL', 'BGR', 'CZE', 'DEU', 'DNK', 'ESP', 'EST', 'FIN', 'FRA', 'GRC', 'HUN', 'HRV', 'IRL', 'ITA',
+                'LTU', 'LUX', 'LVA', 'MLT', 'NLD', 'POL', 'PRT', 'ROU', 'SVN', 'SVK', 'SWE']
+
+        df = cleanCAPFMpolicies()
+
+        df = df[~df.Country.isin(EU26)]
+
+        df.to_csv("data/CAPMF/NonEU_cleanedCAPMF.csv", index=False)
 
     return df
 
-def getControl():
-    nonEU = []
-
-    df = cleanCAPFMpolicies()
-
-    df = df[~df.Country.isin(nonEU)]
-
-    df.to_csv("data/CAPMF/NonEU_cleanedCAPMF.csv", index=False)
-
-    return df
 
 
 

@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 
 import getPolicies.loadPolicyAdoptionCAPMF
+from getImport.getImportdatajapan import getRE_Japan
 from getPolicies import loadPolicyAdoptionCAPMF
 
 def adoptionVisualization():
