@@ -1,8 +1,24 @@
 import matplotlib.pyplot as plt
-
+from getImport import getImport
 import getPolicies.loadPolicyAdoptionCAPMF
 from getImport.getImportdatajapan import getRE_Japan
 from getPolicies import loadPolicyAdoptionCAPMF
+import seaborn as sns
+
+def importVisualization():
+    df = getImportEU.loadImports()
+
+    plt.figure(figsize=(14, 8))
+
+    sns.set_style("darkgrid")
+    sns.lineplot(data=df, x='Year', y="Euro_value")
+
+    plt.xticks(df.index.get_level_values(0), rotation=45)  #access only first level of the MultiIndex pivot table, i.e. the Years
+
+    plt.show()
+
+
+
 
 def adoptionVisualization():
 
