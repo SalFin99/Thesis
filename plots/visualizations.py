@@ -1,21 +1,89 @@
 import matplotlib.pyplot as plt
-from getImport import getImport
+import numpy as np
+from ImportData import getImport
 import getPolicies.loadPolicyAdoptionCAPMF
-from getImport.getImportdatajapan import getRE_Japan
 from getPolicies import loadPolicyAdoptionCAPMF
 import seaborn as sns
 
 def importVisualization():
-    df = getImportEU.loadImports()
+    df = getImport.loadImports('data/imports/Brazil/BRA_850231.csv')
+
+    Logdf = np.log(df)
 
     plt.figure(figsize=(14, 8))
 
     sns.set_style("darkgrid")
-    sns.lineplot(data=df, x='Year', y="Euro_value")
+
+    """
+        sns.lineplot(data=df, x='Year', y="Weight")
+        sns.lineplot(data=df, x='Year', y="Value")
+    """
+
+    sns.lineplot(data=df, x='Year', y="Value")
+
+    plt.xticks(df.index.get_level_values(0), rotation=45)  #access only first level of the MultiIndex pivot table, i.e. the Years
+
+    """
+        plt.title("EU import value for HS-XXXXXX")
+        plt.title("EU import weight (in KG) for HS-XXXXXX")
+
+        plt.title("Canada import value HS-XXXXXX")
+        plt.title("Canada import weight (in KG) for HS-XXXXXX")
+        
+        plt.title("Japan import value for HS-XXXXXX")
+        plt.title("Japan import weight for HS-XXXXXX")
+        
+        plt.title("South Korea import value for HS-XXXXXX")
+        plt.title("South Korea import weight for HS-XXXXXX")
+        
+        plt.title("US import value for HS-XXXXXX")
+        plt.title("US import weight for HS-XXXXXX")
+        
+        plt.title("Brazil import value for HS-XXXXXX")
+        plt.title("Brazil import weight for HS-XXXXXX")
+    """
+
+    plt.title("Brazil import value for HS-850231")
+
+    plt.show()
+
+
+    plt.figure(figsize=(14, 8))
+
+    sns.set_style("darkgrid")
+
+    """
+        sns.lineplot(data=df, x='Year', y="Weight")
+        sns.lineplot(data=df, x='Year', y="Value")
+
+    """
+
+    sns.lineplot(data=Logdf, x='Year', y="Value")
+
+    """
+        plt.title("EU log of import value HS-XXXXXX")
+        plt.title("EU log of import weight (in KG) for HS-XXXXXX")
+        
+        plt.title("CANADA log of import value HS-XXXXXX")
+        plt.title("Canada log of import weight (in Kg) for HS-XXXXXX")
+        
+        plt.title("Japan log of import value HS-XXXXXX")
+        plt.title("Japan log of import weight (in Kg) for HS-XXXXXX")
+        
+        plt.title("South Korea log of import value for HS-XXXXXX")
+        plt.title("South Korea log of weight (in Kg) for HS-XXXXXX")
+        
+        plt.title("US log of import value for HS-XXXXXX")
+        plt.title("US log of weight (in Kg) for HS-XXXXXX")
+
+
+    """
+    plt.title("Brazil log of import value for HS-850231")
 
     plt.xticks(df.index.get_level_values(0), rotation=45)  #access only first level of the MultiIndex pivot table, i.e. the Years
 
     plt.show()
+
 
 
 
@@ -39,33 +107,6 @@ def adoptionVisualization():
     plt.show()
 
 
-def showTrend_Magnets_Japan():
-    imports = getRE_Japan()
-
-    plt.figure(figsize=(20, 20))
-    #plt.plot(imports.index, imports['NetWgt'], label='NetWgt')
-    plt.plot(imports.index, imports['PrimaryValue'], label='PrimaryValue')
-
-    plt.xlabel('Period')
-    plt.ylabel('Values')
-    plt.title('NetWgt and PrimaryValue')
-
-    plt.legend()
-    plt.show()
-
-
-def showTrend_RE_Japan():
-    imports = getRE_Japan()
-
-    plt.figure(figsize=(14, 10))
-    plt.plot(imports.index, imports['NetWgt'], label='NetWgt')
-    plt.plot(imports.index, imports['PrimaryValue'], label='PrimaryValue')
-
-    plt.xlabel('Period')
-    plt.ylabel('Values')
-    plt.title('NetWgt and PrimaryValue')
-    plt.legend()
-    plt.show()
 
 
 """
