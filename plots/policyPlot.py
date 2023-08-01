@@ -1,5 +1,5 @@
 import numpy as np
-
+from policy import loadPolicyAdoptionCAPMF
 from panels import CAPMFpanels
 import matplotlib.pyplot as plt
 
@@ -111,7 +111,6 @@ def preCommonTrendsLogStringencyControl():
     EU26 = CAPMFpanels.buildPanel_EU26()
     control = CAPMFpanels.buildPanel_NonEU()
 
-
     average_stringencyEU26 = EU26.mean(axis=1).groupby('year').mean()
     average_stringencyControl = control.mean(axis=1).groupby('year').mean()
 
@@ -143,4 +142,22 @@ def preCommonTrendsLogStringencyControl():
     plt.grid(True, linestyle='--', alpha=0.5)
     plt.legend()
 
+    plt.show()
+
+def adoptionVisualization():
+
+    df = loadPolicyAdoptionCAPMF.getAdoption()
+
+    plt.figure(figsize=(14, 8))
+    plt.plot(df.index, df['EUadopted'])
+    plt.title("Number of EU adopted policies 2000-2019")
+    plt.xticks(df.index, rotation=45)  # Rotate x-axis tick labels for better readability
+    plt.axvline(x=2009,color='g') #set vertical line on 2009 for policy introduction (the treatment)
+    plt.ylabel('Number of policies')
+    plt.xlabel('Years')
+
+
+
+    plt.grid(True, linestyle='--', alpha=0.5)
+    plt.tight_layout()  # To avoid label cutoff
     plt.show()
