@@ -1,30 +1,57 @@
+import numpy as np
+
 from ImportData import getImport
 import pandas as pd
 
-def importDataMerger():
+def ControlImportMerger():
+    dfBra = getImport.loadSingleImports('data/imports/Brazil/china/BRA_850650ch.csv')
 
-    dfBra = getImport.loadImports('data/imports/Brazil/BRA_280530.csv')
+    dfCan = getImport.loadSingleImports('data/imports/canada/china/CAN_850650ch.csv')
 
-    dfCan = getImport.loadImports('data/imports/canada/CAN_280530.csv')
+    dfJap = getImport.loadSingleImports('data/imports/japan/China/JAP_850650ch.csv')
 
-    dfJap = getImport.loadImports('data/imports/japan/JAP_280530.csv')
+    dfKor = getImport.loadSingleImports('data/imports/SouthKorea/china/KOR_850650ch.csv')
 
-    dfKor = getImport.loadImports('data/imports/SouthKorea/KOR_280530.csv')
+    dfUs = getImport.loadSingleImports('data/imports/USA/china/USA_850650ch.csv')
 
-    dfUs = getImport.loadImports('data/imports/USA/US_280530.csv')
+    dfAus = getImport.loadSingleImports('data/imports/Australia/china/AUS_850650ch.csv')
 
-    dfControl = pd.concat([dfUs,dfKor,dfJap,dfBra,dfCan], join="inner")
-    dfControl.to_csv("data/imports/concat.csv", index=True)
+    dfZaf = getImport.loadSingleImports('data/imports/SouthAfrica/china/ZAF_850650ch.csv')
 
-    ControlImportPanel=dfControl.pivot_table(index='Year', values='Value', aggfunc='sum')
+    dfControl = pd.concat([dfKor, dfZaf, dfAus, dfBra, dfJap, dfUs, dfCan], join="inner")
 
-    ControlImportPanel.to_csv("data/imports/Panel.csv", index=True)
-    print(ControlImportPanel)
+    # dfControl.to_csv("data/imports/concat.csv", index=True)
 
-""""
-For tomorrow: 
-- generate all dfControls for all the materials
-- create pivot
+    ControlImportPanel = dfControl.pivot_table(index='Year', values='Value', aggfunc=np.mean)
 
-"""
+    # ControlImportPanel.to_csv("data/imports/Panel.csv", index=True)
+
+    return ControlImportPanel
+
+
+def ControlRatioMerger():
+    #dfBra = getImport.loadImportRatio('data/imports/Brazil/china/BRA_850650ch.csv')
+
+    dfCan = getImport.loadImportRatio('data/imports/canada/ratio/CANratio850650.csv')
+
+    #dfJap = getImport.loadImportRatio('data/imports/japan/China/JAP_850650ch.csv')
+
+    dfKor = getImport.loadImportRatio('data/imports/SouthKorea/ratio/KORratio850650.csv')
+
+    dfUs = getImport.loadImportRatio('data/imports/USA/ratio/USAratio850650.csv')
+
+    #dfAus = getImport.loadImportRatio('data/imports/Australia/china/AUS_850650ch.csv')
+
+    #dfZaf = getImport.loadImportRatio('data/imports/SouthAfrica/china/ZAF_850650ch.csv')
+
+    dfControl = pd.concat([dfKor, dfUs,dfCan], join="inner")
+
+    # dfControl.to_csv("data/imports/concat.csv", index=True)
+
+    ControlRatioPanel = dfControl.pivot_table(index='Year', values='import_ratio', aggfunc=np.mean)
+
+    # ControlImportPanel.to_csv("data/imports/Panel.csv", index=True)
+
+    return ControlRatioPanel
+
 
