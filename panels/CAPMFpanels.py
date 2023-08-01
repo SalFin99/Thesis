@@ -1,4 +1,4 @@
-from getPolicies import loadCAPMF, loadEPS
+from policy import loadCAPMF, loadEPS
 import numpy as np
 import pandas as pd
 
