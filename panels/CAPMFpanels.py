@@ -15,18 +15,6 @@ This sample will be then used to test the common trend assumption of DID and sel
 """
 
 
-def buildPanel_EU():
-    df = loadCAPMF.getEU()
-
-    df.year=pd.to_datetime(df['year'], format='%Y').dt.year
-
-    panel_EU = df.pivot_table(index=['Country', 'year'], columns='Policy', values='Stringency')
-
-    #df.to_csv("data/CAPMF/panels/EU_panel.csv", index=False)
-
-
-    return panel_EU
-
 def buildPanel_EU26():
     df = loadCAPMF.getEU26()
 
@@ -39,23 +27,14 @@ def buildPanel_EU26():
 
     return panel_EU26
 
-def buildPanel_NonEU():
-    df = loadCAPMF.getNonEU()
-
-    df.year=pd.to_datetime(df['year'], format='%Y').dt.year
-
-    panel_NonEU26 = df.pivot_table(index=['Country', 'year'], columns='Policy', values='Stringency')
-
-    #df.to_csv("data/CAPMF/panels/NonEU26_panel.csv", index=False)
-
-    return panel_NonEU26
+#used to get the panel data for climate policy stringency for nonEU countries and for EU as a single unit.
 
 def buildPanel_Control():
     df = loadCAPMF.getControl()
 
-    panel_NonEU26 = df.pivot_table(index=['Country', 'year'], columns='Policy', values='Stringency')
+    df.year=pd.to_datetime(df['year'], format='%Y').dt.year
 
-    #df.to_csv("data/CAPMF/panels/NonEU26_panel.csv", index=False)
+    panel_Control = df.pivot_table(index=['Country', 'year'], columns='Policy', values='Stringency', aggfunc=np.mean)
 
-    return panel_NonEU26
+    return panel_Control
 
