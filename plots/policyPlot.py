@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 
 def preCommonTrendsStringency():
     EU26 = CAPMFpanels.buildPanel_EU26()
-    nonEU = CAPMFpanels.buildPanel_NonEU()
+    nonEU = CAPMFpanels.buildPanel_CAPMF()
 
-
+    #mean of all the policies instruments, grouped by year for every country, then average of the grouped years to get aggregated EU
     average_stringencyEU26 = EU26.mean(axis=1).groupby('year').mean()
     average_stringencyNonEU26 = nonEU.mean(axis=1).groupby('year').mean()
 
@@ -17,7 +17,6 @@ def preCommonTrendsStringency():
     average_stringency_valuesEU26 = average_stringencyEU26.values
 
     yearsNonEU = average_stringencyEU26.index.get_level_values('year')
-
     average_stringency_valuesNonEU26 = average_stringencyNonEU26.values
 
     plt.figure(figsize=(14, 8))
@@ -38,7 +37,7 @@ def preCommonTrendsStringency():
 
 def preCommonTrendsLogStringency():
     EU26 = CAPMFpanels.buildPanel_EU26()
-    nonEU = CAPMFpanels.buildPanel_NonEU()
+    nonEU = CAPMFpanels.buildPanel_CAPMF()
 
 
     average_stringencyEU26 = EU26.mean(axis=1).groupby('year').mean()
@@ -77,7 +76,7 @@ def preCommonTrendsLogStringency():
 
 def preCommonTrendsStringencyControl():
     EU26 = CAPMFpanels.buildPanel_EU26()
-    control = CAPMFpanels.buildPanel_NonEU()
+    control = CAPMFpanels.buildPanel_CAPMF()
 
 
     average_stringencyEU26 = EU26.mean(axis=1).groupby('year').mean()
@@ -109,7 +108,7 @@ def preCommonTrendsStringencyControl():
 
 def preCommonTrendsLogStringencyControl():
     EU26 = CAPMFpanels.buildPanel_EU26()
-    control = CAPMFpanels.buildPanel_NonEU()
+    control = CAPMFpanels.buildPanel_CAPMF()
 
     average_stringencyEU26 = EU26.mean(axis=1).groupby('year').mean()
     average_stringencyControl = control.mean(axis=1).groupby('year').mean()
