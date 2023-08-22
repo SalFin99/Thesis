@@ -8,7 +8,7 @@ import openpyxl
 
 
 def cleanValues_USA():
-    df=pd.read_csv('data/imports/canada/china/CAN_china.csv', delimiter=';')
+    df=pd.read_csv('data/NZMEX.csv', delimiter=';')
 
     #df = df.transpose()
 
@@ -34,6 +34,9 @@ def cleanValues_USA():
 
     df=df.drop(['HS850511', 'HS850231', 'HS854140'], axis=1)
 
+
+    #rename code column to indicate value
+
     df=df.rename({'HS280530':'Value'}, axis=1)
     dfHS850231=dfHS850231.rename({'HS850231':'Value'}, axis=1)
     dfHS850511=dfHS850511.rename({'HS850511':'Value'}, axis=1)
@@ -42,7 +45,7 @@ def cleanValues_USA():
 
     df.to_csv('data/imports/USA/china/CAN_280530ch.csv', index=True)
 
-    dfHS850231.to_csv('data/imports/canada/china/CAN_850231ch.csv', index=True)
+    dfHS850231.to_csv('data/imports/Canada/china/CAN_850231ch.csv', index=True)
 
     dfHS850511.to_csv('data/imports/USA/china/CAN_850511ch.csv', index=True)
 
