@@ -15,17 +15,22 @@ This sample will be then used to test the common trend assumption of DID and sel
 """
 
 
-def buildPanel_EU26():
+def buildPanel_PolicyStringency():
     df = loadCAPMF.getEU26()
-
-    df.year=pd.to_datetime(df['year'], format='%Y').dt.year
-
-    panel_EU26 = df.pivot_table(index=['Country', 'year'], columns='Policy', values='Stringency', aggfunc=np.mean)
+    #df = loadCAPMF.getControl()
 
 
-    #df.to_csv("data/CAPMF/panels/EU26_panel.csv", index=False)
+    panel_stringency = df.pivot_table(index=['Year', 'Country'], values='Stringency') #Just for control countries
+   # panel_stringency = df.pivot_table(index=['Year'], values='Stringency', aggfunc=np.mean) #Just for EU because we aggregate the data
 
-    return panel_EU26
+
+    #panel_stringency.insert(0,'Country', 'EU')
+
+    print(panel_stringency)
+
+    panel_stringency.to_csv("data/CAPMF/stringency/policyStringency/EUstatesPolicyStringency.csv", index=True)
+
+
 
 #used to get the panel data for climate policy stringency for nonEU countries and for EU as a single unit.
 
@@ -37,4 +42,5 @@ def buildPanel_Control():
     panel_Control = df.pivot_table(index=['Country', 'year'], columns='Policy', values='Stringency', aggfunc=np.mean)
 
     return panel_Control
+
 
