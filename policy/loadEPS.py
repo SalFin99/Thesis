@@ -43,7 +43,49 @@ def load_and_cleanEPStreatment():
     #print(df)
     return df
 
+def loadEPSMbyPolicy():
+
+    df=pd.read_csv("data/eps/EPSbyPolicy.csv", delimiter=",")
+    df = df.rename(columns={"ISO":"Country", "Component":"Policy", "Comp":"Stringency"})
+
+    return df
+
+def EPSbyPolicyEU():
+    EU = ['AUT', 'DEU', 'DNK', 'ESP', 'FIN', 'FRA', 'IRL', 'ITA', 'PRT', 'SWE']
+
+    df = loadEPSMbyPolicy()
+
+    df = df[df.Country.isin(EU)]
+
+    df.Year = pd.to_datetime(df['Year'], format='%Y').dt.year
+
+    df['Country'] = 'EU'
+
+    df = df.pivot_table(index=['Country','Year'], columns=['Policy'], values='Value', aggfunc=np.mean)
 
 
+    return df
+
+def EPSbyPolicyControl():
+    EU = ['AUT', 'BEL','CZE', 'DEU', 'DNK', 'ESP', 'EST', 'FIN', 'FRA', 'GRC', 'IRL', 'ITA', 'LUX', 'NLD', 'POL', 'PRT', 'SVN','SVK', 'SWE']
+
+    df = loadEPSMbyPolicy()
+
+    df = df[~df.Country.isin(EU)]
+
+    df = df[df['Country'] != 'HUN']
+
+    df.Year = pd.to_datetime(df['Year'], format='%Y').dt.year
+
+    df = df.pivot_table(index=['Country', 'Year'], columns='Policy', values='Value')
+
+    return df
+
+def EPSbyPolicyAll():
+    EU = EPSbyPolicyEU()
+    Control = EPSbyPolicyControl()
 
 
+    all = pd.concat([EU, Control], axis=0, ignore_index=False)
+
+    all.to_csv('data/eps/epsAllByPolicy.csv', index=True)
