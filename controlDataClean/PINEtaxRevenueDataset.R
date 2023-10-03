@@ -24,8 +24,12 @@ readAllfiles <- function(path){
     
   }
   
+  #create just a single df
   combined_df <- do.call(rbind, dataframes)
+  #delete row names
   rownames(combined_df)<-NULL
+  
+  #set country names with capital letter
   combined_df$country <- stringr::str_to_title(combined_df$country)
   
   return(combined_df)
