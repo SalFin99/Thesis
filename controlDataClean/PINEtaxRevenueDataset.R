@@ -17,7 +17,7 @@ readAllfiles <- function(path){
     colnames(df)[1] <- "year"
     
     
-    #the original csv from the PINE database has an "OECD" column, in position 3, that I dont need.
+    #the original csv from the PINE database has an "OECD" column, in position 3, that I don't need.
     df <- subset(df, select = -c(3))
     
     dataframes[[country_name]] <- df
